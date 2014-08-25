@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        var names = "Sophia Emma Olivia Isabella Mia Ava Lily Zoe Emily Chloe Layla Madison Madelyn Abigail Aubrey Charlotte Amelia Ella Kaylee Avery Aaliyah Hailey Hannah Addison Riley Harper Aria Arianna Mackenzie Lila Evelyn Adalyn Grace Brooklyn Ellie Anna Kaitlyn Isabelle Sophie Scarlett Natalie Leah Sarah Nora Mila Elizabeth Lillian Kylie Audrey Lucy Jackson Aide Liam Lucas Noah Mason Jayden Ethan Jacob Jack Caden Logan Benjamin Michael Caleb Ryan Alexander Elijah James William Oliver Connor Matthew Daniel Luke Brayden Jayce Henry Carter Dylan Gabriel Joshua Nicholas Isaac Owen Nathan Grayson Eli Landon Andrew Max Samuel Gavin Wyatt Christian Hunter Cameron Evan Charlie David".split(' ');
+
+        var array_list = [];
+        for (var i = 0, len = names.length; i < len; i++) {
+            array_list.push({
+                id: ( i + 1 ),
+                name: names[i]
+            });
+        }
+
+        console.log(array_list.slice(0,10));
+
+        function shuffle(arr) {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                var index = Math.floor(Math.random() * arr.length);
+                var temp = arr[i];
+                arr[i] = arr[index];
+                arr[index] = temp;
+            }
+        }
+
+        shuffle(array_list);
+
+        // McMillan
+
+        var test_list = [2,8,9,7,4,5,3,6,1];
+
+        function qSort(arr, comparator) {
+            if (arr.length == 0) {
+                return [];
+            }
+            var left = [];
+            var right = [];
+            var pivot = arr[0];
+            for (var i = 1; i < arr.length; i++) {
+                //console.log("pivot: " + pivot + " current element: " + arr[i]);
+                if (comparator(arr[i] , pivot)) {
+                    // console.log("moving " + arr[i] + " to the left");
+                    left.push(arr[i]);
+                } else {
+                    //console.log("moving " + arr[i] + " to the right");
+                    right.push(arr[i]);
+                }
+            }
+
+            return qSort(left, comparator).concat(pivot, qSort(right, comparator));
+        }
+
+        console.log(qSort(array_list, comparator_mcMillan).map(function (elem) {
+            return elem.name
+        }).join(', '));
+
+        console.log(array_list.sort(comparator_native));
+
+
+        function comparator_native(obj1, obj2){
+            if (obj1.name < obj2.name) return -1;
+            else if (obj1.name > obj2.name) return 1;
+            else return 0;
+        }
+        function comparator_mcMillan(obj1, obj2){
+            if (obj1.name < obj2.name) return true;
+            else if (obj1.name > obj2.name) return false;
+            else return false;
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
